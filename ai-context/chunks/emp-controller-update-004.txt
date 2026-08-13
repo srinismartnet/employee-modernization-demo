@@ -1,0 +1,17 @@
+public IHttpActionResult Update(int id, Employee emp)
+{
+    var existing = _repo.GetById(id);
+    if (existing == null) return NotFound();
+    if ((existing.Department == "HR" || existing.Department == "Finance")
+        && emp.Department != existing.Department)
+    {
+        return BadRequest("Department changes for HR/Finance require offline approval.");
+    }
+    existing.FirstName = emp.FirstName;
+    existing.LastName = emp.LastName;
+    existing.Department = emp.Department;
+    existing.ManagerEmpId = emp.ManagerEmpId;
+    // Salary intentionally NOT updatable here.
+    _repo.Update(existing);
+    return Ok(existing);
+}

@@ -1,0 +1,4 @@
+INSERT INTO Employees (FirstName,LastName,Department,Salary,Status,HireDate,ManagerEmpId)
+OUTPUT INSERTED.EmployeeId
+VALUES (@fn,@ln,@dept,@sal,@status,@hire,@mgr)
+-- ManagerEmpId default "0" means no manager (string sentinel, not NULL)

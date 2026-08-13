@@ -1,0 +1,5 @@
+public IHttpActionResult GetAll()
+{
+    var employees = _repo.GetAll().Where(e => e.Status != 3).ToList();
+    return Ok(employees);
+}

@@ -1,0 +1,11 @@
+public IHttpActionResult Create(Employee emp)
+{
+    if (string.IsNullOrWhiteSpace(emp.FirstName) || string.IsNullOrWhiteSpace(emp.LastName))
+        return BadRequest("First and last name are required.");
+    if (string.IsNullOrWhiteSpace(emp.Salary))
+        emp.Salary = "TBD";
+    emp.Status = 0;
+    emp.HireDate = emp.HireDate == DateTime.MinValue ? DateTime.Now : emp.HireDate;
+    var created = _repo.Create(emp);
+    return Created($"api/employee/{created.EmployeeId}", created);
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "chunk_id": "emp-model-001",
+    "source_file": "legacy-app/Employee.cs",
+    "tags": ["model", "employee", "schema", "salary", "status", "hr-rule"],
+    "summary": "Employee model definition. Salary is a string (legacy quirk). Status is an int 0-3. HR-department employees have special delete protection noted here.",
+    "token_estimate": 180
+  },
+  {
+    "chunk_id": "emp-controller-getall-002",
+    "source_file": "legacy-app/EmployeeController.cs",
+    "tags": ["controller", "read", "list", "filter", "status"],
+    "summary": "GET all employees. Filters out Status=3 (terminated) by default. Downstream reports depend on this.",
+    "token_estimate": 90
+  },
+  {
+    "chunk_id": "emp-controller-create-003",
+    "source_file": "legacy-app/EmployeeController.cs",
+    "tags": ["controller", "create", "validation", "salary", "status"],
+    "summary": "POST create employee. Validates first/last name required. Defaults salary to 'TBD' if blank. Forces new hires to Status=0 (active).",
+    "token_estimate": 110
+  },
+  {
+    "chunk_id": "emp-controller-update-004",
+    "source_file": "legacy-app/EmployeeController.cs",
+    "tags": ["controller", "update", "department", "hr-rule", "finance-rule", "salary"],
+    "summary": "PUT update employee. Blocks department changes for HR/Finance employees. Salary is explicitly NOT updatable here by design.",
+    "token_estimate": 130
+  },
+  {
+    "chunk_id": "emp-controller-delete-005",
+    "source_file": "legacy-app/EmployeeController.cs",
+    "tags": ["controller", "delete", "hr-rule", "soft-delete", "compliance"],
+    "summary": "DELETE employee. Blocks deletion for HR department. Always a soft delete (Status -> 3/Terminated), never a hard delete, per compliance requirement.",
+    "token_estimate": 100
+  },
+  {
+    "chunk_id": "emp-repo-schema-006",
+    "source_file": "legacy-app/EmployeeRepository.cs",
+    "tags": ["data-access", "sql", "schema", "manager-id"],
+    "summary": "Raw ADO.NET SQL access to Employees table. Shows actual column names and that ManagerEmpId uses string '0' as a no-manager sentinel.",
+    "token_estimate": 150
+  }
+]

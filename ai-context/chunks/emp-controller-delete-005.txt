@@ -1,0 +1,10 @@
+public IHttpActionResult Delete(int id)
+{
+    var existing = _repo.GetById(id);
+    if (existing == null) return NotFound();
+    if (existing.Department == "HR")
+        return BadRequest("HR employees cannot be removed via the API.");
+    existing.Status = 3; // soft delete only, no hard delete ever exists
+    _repo.Update(existing);
+    return Ok();
+}

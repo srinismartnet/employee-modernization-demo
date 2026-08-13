@@ -1,0 +1,12 @@
+public class Employee
+{
+    public int EmployeeId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Department { get; set; }
+    public string Salary { get; set; }      // "50000", "TBD", "Confidential"
+    public int Status { get; set; }         // 0=Active,1=Inactive,2=OnLeave,3=Terminated
+    public DateTime HireDate { get; set; }
+    public string ManagerEmpId { get; set; } // "0" means none
+    // RULE: HR dept employees can never be soft-deleted or Terminated via API.
+}
